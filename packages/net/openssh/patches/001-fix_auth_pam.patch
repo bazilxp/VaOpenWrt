@@ -1,0 +1,42 @@
+--- a/auth-pam.c
++++ b/auth-pam.c
+@@ -175,14 +175,14 @@ sshpam_sigchld_handler(int sig)
+ }
+ 
+ /* ARGSUSED */
+-static void
++/*static void
+ pthread_exit(void *value)
+ {
+ 	_exit(0);
+-}
++}*/
+ 
+ /* ARGSUSED */
+-static int
++/*static int
+ pthread_create(sp_pthread_t *thread, const void *attr,
+     void *(*thread_start)(void *), void *arg)
+ {
+@@ -213,10 +213,10 @@ pthread_cancel(sp_pthread_t thread)
+ {
+ 	signal(SIGCHLD, sshpam_oldsig);
+ 	return (kill(thread, SIGTERM));
+-}
++}*/
+ 
+ /* ARGSUSED */
+-static int
++/*static int
+ pthread_join(sp_pthread_t thread, void **value)
+ {
+ 	int status;
+@@ -230,7 +230,7 @@ pthread_join(sp_pthread_t thread, void *
+ 		fatal("%s: waitpid: %s", __func__, strerror(errno));
+ 	}
+ 	return (status);
+-}
++}*/
+ #endif
+ 
+ 
