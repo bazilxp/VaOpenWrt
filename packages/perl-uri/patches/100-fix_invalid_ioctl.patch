@@ -1,0 +1,11 @@
+--- a/Makefile.PL
++++ b/Makefile.PL
+@@ -132,7 +132,4 @@ delete $WriteMakefileArgs{LICENSE}
+ 
+ WriteMakefile(%WriteMakefileArgs);
+ 
+-# pod2text is in https://metacpan.org/release/podlators
+-system("pod2text $WriteMakefileArgs{VERSION_FROM} > README")
+-    if $developer
+-        and (not -e 'README' or (stat('README'))[9] < (stat($WriteMakefileArgs{VERSION_FROM}))[9]);
++print ("Looks  Good");
