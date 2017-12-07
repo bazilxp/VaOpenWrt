@@ -1,0 +1,12 @@
+--- a/misc/miredo.conf-in
++++ b/misc/miredo.conf-in
+@@ -28,6 +28,9 @@ InterfaceName	teredo
+ #ServerAddress teredo.ginzado.ne.jp
+ #ServerAddress teredo.iks-jena.de
+ ServerAddress teredo.remlab.net
++#ServerAddress  win10.ipv6.microsoft.com
++#ServerAddress  teredo-debian.remlab.net
++
+ #ServerAddress2 teredo2.remlab.net
+ 
+ ## RELAY-SPECIFIC OPTIONS

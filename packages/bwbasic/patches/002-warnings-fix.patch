@@ -1,0 +1,75 @@
+--- a/bwbasic.h
++++ b/bwbasic.h
+@@ -110,59 +110,6 @@
+ 
+ ***************************************************************/
+ 
+-#ifdef __STDC__
+-#define HAVE_RAISE TRUE
+-#define HAVE_STRING TRUE
+-#define HAVE_STDLIB TRUE
+-#endif
+-
+-#ifdef __STDC__
+-#define	HAVE_SIGNAL	TRUE
+-#else
+-#define	HAVE_SIGNAL	TRUE	/* Compiler supports signal() */
+-#endif
+-
+-#ifdef __STDC__
+-#define	HAVE_LONGJUMP	TRUE
+-#else
+-#define	HAVE_LONGJUMP	TRUE	/* Compiler supports setjmp() and longjmp() */
+-#endif
+-
+-/* configure sets this */
+-#ifndef HAVE_RAISE
+-#define HAVE_RAISE	FALSE	/* Compiler supports raise() */
+-#endif
+-
+-/* configure sets this */
+-#ifndef HAVE_STRING
+-#define	HAVE_STRING	FALSE	/* Compiler has <string.h> header */
+-#endif
+-
+-/* configure sets this */
+-#ifndef HAVE_STDLIB
+-#define HAVE_STDLIB	FALSE	/* Compiler has <stdlib.h> header */
+-#endif
+-
+-/* configure sets this (section added by JBV) */
+-#ifndef HAVE_UNISTD
+-#define HAVE_UNISTD	FALSE	/* Compiler has <unistd.h> header */
+-#endif
+-
+-#ifdef __STDC__
+-#define HAVE_SYSTYPES	FALSE
+-#else
+-#define HAVE_SYSTYPES	TRUE	/* Compiler has <sys/types.h> header */
+-#endif
+-
+-#ifdef __STDC__
+-#define HAVE_SYSSTAT	FALSE
+-#else
+-#define HAVE_SYSSTAT	TRUE	/* Compiler has <sys/stat.h> header */
+-#endif
+-
+-#ifndef HAVE_MATHERR
+-#define HAVE_MATHERR	FALSE	/* Compiler doesn't call matherr */
+-#endif
+ 
+ /***************************************************************
+ 
+--- a/bwx_ncu.c
++++ b/bwx_ncu.c
+@@ -103,10 +103,6 @@ main( int argc, char **argv )
+    scrollok(stdscr,1);
+    bwb_init( argc, argv );
+ 
+-#if INTERACTIVE
+-   setjmp( mark );
+-#endif
+-
+    while( !feof( stdin ) )		/* condition !feof( stdin ) added in v1.11 */
+       {
+       bwb_mainloop();

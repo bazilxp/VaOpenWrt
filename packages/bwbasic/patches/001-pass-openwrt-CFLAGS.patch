@@ -1,0 +1,35 @@
+--- a/Makefile.ncu
++++ b/Makefile.ncu
+@@ -19,13 +19,13 @@ DEFS =  -DHAVE_STRING=1 -DHAVE_STDLIB=1
+ 
+ # Revised by JBV
+ #CFLAGS = -O
+-CFLAGS = -g -ansi
++CFLAGS += -g -ansi
+ 
+ # Revised by JBV
+ #LDFLAGS = -s
+ 
+ prefix = /usr/local
+-exec_prefix = $(prefix)
++exec_prefix = $(DESTDIR)$(prefix)
+ bindir = $(exec_prefix)/bin
+ 
+ SHELL = /bin/sh
+@@ -75,7 +75,7 @@ DISTFILES=	$(CFILES) $(HFILES) $(MISCFIL
+ all: bwbasic renum
+ 
+ bwbasic:	$(OFILES)
+-		$(CC) $(OFILES) -lm -lcurses -o $@ $(LDFLAGS)
++		$(CC) $(OFILES) -lm -lncurses -o $@ $(LDFLAGS)
+ 
+ # Added by JBV
+ renum:
+@@ -87,6 +87,7 @@ $(OFILES):      $(HFILES)
+ 	$(CC) -c $(CPPFLAGS) -I$(srcdir) $(DEFS) $(CFLAGS) $<
+ 
+ install: all
++	mkdir -p $(bindir)
+ 	$(INSTALL_PROGRAM) bwbasic $(bindir)/bwbasic
+ 
+ uninstall:

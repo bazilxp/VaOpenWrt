@@ -1,0 +1,11 @@
+--- a/libtun6/tun6.c
++++ b/libtun6/tun6.c
+@@ -65,7 +65,7 @@ struct in6_ifreq {
+ };
+
+ # include <net/route.h> // struct in6_rtmsg
+-# include <netinet/if_ether.h> // ETH_P_IPV6
++//# include <netinet/if_ether.h> // ETH_P_IPV6
+
+ typedef struct
+ {
