@@ -1,0 +1,15 @@
+--- a/biewlib/sysdep/generic/__config.h
++++ b/biewlib/sysdep/generic/__config.h
+@@ -26,10 +26,11 @@
+ #ifdef	__GLIBC__
+ 
+ #include <endian.h>
+-#include <stdint.h>
+ 
+ #endif
+ 
++#include <stdint.h>
++
+ #define tInt8		int8_t
+ #define tInt16		int16_t
+ #define tInt32		int32_t

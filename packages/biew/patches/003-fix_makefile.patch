@@ -1,0 +1,36 @@
+--- a/makefile
++++ b/makefile
+@@ -19,8 +19,8 @@ HOST_LDFLAGS=
+ 
+ include ./config.mak
+ 
+-CFLAGS = $(CDEFOS) $(CDEFSYS) $(HOST_CFLAGS)
+-LDFLAGS = $(OSLDEF) $(HOST_LDFLAGS)
++CFLAGS += $(CDEFOS) $(CDEFSYS) $(HOST_CFLAGS)
++LDFLAGS += $(OSLDEF) $(HOST_LDFLAGS)
+ 
+ ###########################################################################
+ # TARGET: put name of executable image here                               #
+@@ -32,7 +32,7 @@ BIEWLIB = ./biewlib/$(LIBPREFIX)$(TARGET
+ ##########################################################################
+ 
+ INCS = -I.
+-LIBS = -L./biewlib -l$(TARGET) $(OS_LIBS)
++LIBS = -L./biewlib -l$(TARGET) -lc  -lrt -lpthread -lncursesw
+ OBJS = \
+ addendum.o\
+ bconsole.o\
+@@ -158,11 +158,11 @@ cleanlib:
+ 	$(RM) $(BIEWLIB)
+ 
+ $(BIEWLIB): $(BIEWLIB_OBJS)
+-	$(AR) $@ $(BIEWLIB_OBJS)
++	$(AR) -rcu $@ $(BIEWLIB_OBJS)
+ 	$(RANLIB) $@
+ 
+ $(TARGET): $(OBJS) $(BIEWLIB)
+-	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
+ %.o : %.c
+ 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
+ 
