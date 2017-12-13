@@ -1,0 +1,11 @@
+--- a/include/util.h
++++ b/include/util.h
+@@ -3,6 +3,8 @@
+ #ifndef CLIMM_UTIL_H
+ #define CLIMM_UTIL_H
+ 
++#include <stdint.h>
++
+ typedef enum {
+    ev_msg    = 1, /* a message has arrived */
+    ev_on     = 2, /* a contact went online */
