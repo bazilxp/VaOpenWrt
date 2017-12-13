@@ -1,0 +1,43 @@
+--- a/src/shared/types.h
++++ b/src/shared/types.h
+@@ -6,17 +6,9 @@
+ #define NO_TYPEDEF_USHORT
+ #endif
+ 
+-#ifndef NO_TYPEDEF_ULONG
+ typedef unsigned long ulong;
+-#endif
+-
+-#ifndef NO_TYPEDEF_USHORT
+ typedef unsigned short ushort;
+-#endif
+-
+-#ifndef NO_TYPEDEF_UCHAR
+ typedef unsigned char uchar;
+-#endif
+ 
+ #ifndef NO_TYPEDEF_BOOL
+ typedef int bool;
+--- a/src/jamlib/jam.h
++++ b/src/jamlib/jam.h
+@@ -40,10 +40,8 @@
+ #include <stdio.h>
+ #include <ctype.h>
+ 
+-#ifndef linux
+ typedef unsigned short ushort;   /* must be 16 bits wide */
+ typedef unsigned long  ulong;    /* must be 32 bits wide */
+-#endif
+ 
+ typedef unsigned char  uchar;    /* must be  8 bits wide */
+ 
+--- a/src/jamlib/mbase.c
++++ b/src/jamlib/mbase.c
+@@ -85,6 +85,7 @@
+ #if defined( __LINUX__ )
+ #include <sys/file.h>
+ #include <unistd.h>
++#include <fcntl.h>
+ #endif
+ 
+ #define OS_ERROR_OFFSET 10000
