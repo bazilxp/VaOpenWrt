@@ -1,0 +1,58 @@
+--- a/f3read.c
++++ b/f3read.c
+@@ -47,7 +47,7 @@ static inline void update_dt(struct time
+ #define BLANK	"                                 "
+ #define CLEAR	("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b" \
+ 		 "\b\b\b\b\b\b\b\b\b\b\b\b\b")
+-
++#define PATH_MAX 256
+ static void validate_file(const char *path, const char *filename,
+ 	uint64_t *ptr_ok, uint64_t *ptr_corrupted, uint64_t *ptr_changed,
+ 	uint64_t *ptr_overwritten, uint64_t *ptr_size, int *read_all,
+@@ -59,7 +59,6 @@ static void validate_file(const char *pa
+ 	int offset_match, error_count;
+ 	size_t sectors_read;
+ 	uint64_t offset, expected_offset;
+-	struct drand48_data state;
+ 	long int rand_int;
+ 	char full_fn[PATH_MAX];
+ 	char *tail_msg = "";
+@@ -98,12 +97,12 @@ static void validate_file(const char *pa
+ 		offset = *((uint64_t *) sector);
+ 		offset_match = offset == expected_offset;
+ 
+-		srand48_r(offset, &state);
++		srand48(offset);
+ 		p = sector + sizeof(offset);
+ 		error_count = 0;
+ 		for (; error_count <= TOLERANCE && p < ptr_end;
+ 			p += sizeof(long int)) {
+-			lrand48_r(&state, &rand_int);
++			rand_int=lrand48();
+ 			if (rand_int != *((long int *) p))
+ 				error_count++;
+ 		}
+--- a/f3write.c
++++ b/f3write.c
+@@ -20,7 +20,6 @@
+ static uint64_t fill_buffer(void *buf, size_t size, uint64_t offset)
+ {
+ 	uint8_t *p, *ptr_next_sector, *ptr_end;
+-	struct drand48_data state;
+ 
+ 	assert(size > 0);
+ 	assert(size % SECTOR_SIZE == 0);
+@@ -29,11 +28,11 @@ static uint64_t fill_buffer(void *buf, s
+ 	ptr_end = p + size;
+ 	while (p < ptr_end) {
+ 		memmove(p, &offset, sizeof(offset));
+-		srand48_r(offset, &state);
++		srand48(offset);
+ 		ptr_next_sector = p + SECTOR_SIZE;
+ 		p += sizeof(offset);
+ 		for (; p < ptr_next_sector; p += sizeof(long int))
+-			lrand48_r(&state, (long int *)p);
++			*p =lrand48();
+ 		assert(p == ptr_next_sector);
+ 		offset += SECTOR_SIZE;
+ 	}
