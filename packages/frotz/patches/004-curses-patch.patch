@@ -1,0 +1,11 @@
+--- a/Makefile
++++ b/Makefile
+@@ -74,7 +74,7 @@ COLOR_DEFS = -DCOLOR_SUPPORT
+ # curses library won't work, comment out the first option and uncomment
+ # the second.
+ #
+-CURSES = -lcurses
++CURSES = -lncurses
+ #CURSES = -lncurses
+ 
+ # Uncomment this if your need to use ncurses instead of the
